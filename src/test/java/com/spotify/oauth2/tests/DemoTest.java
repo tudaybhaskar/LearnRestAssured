@@ -1,9 +1,12 @@
 package com.spotify.oauth2.tests;
 
+import com.spotify.oauth2.api.SpecBuilder;
 import com.spotify.oauth2.utils.ConfigLoader;
 import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 
+import static com.spotify.oauth2.api.SpecBuilder.getRequestSpec;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -13,7 +16,7 @@ public class DemoTest {
 
     @Test
     public void getCurrentUserId(){
-        String actualUserId = RestAssured.given().baseUri("https://api.spotify.com/v1/me")
+        String actualUserId = given().baseUri("https://api.spotify.com/v1/me")
                 .header("Authorization", "Bearer " + access_token)
                 .when()
                 .get()
@@ -24,6 +27,26 @@ public class DemoTest {
                 .response()
                 .jsonPath()
                 .getString("id");
+        System.out.println("Actual User ID : " + actualUserId);
+
+        assertThat(actualUserId, equalTo(ConfigLoader.getInstance().getUserId()));
+    }
+
+    @Test
+    public void getCurrentUserProfile(){
+        String actualUserId = given().spec(getRequestSpec())
+                .header("Authorization", "Bearer " + access_token)
+                .when()
+                .get("/me")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .response()
+                .body()
+                .jsonPath()
+                .getString("id");
+
         System.out.println("Actual User ID : " + actualUserId);
 
         assertThat(actualUserId, equalTo(ConfigLoader.getInstance().getUserId()));
