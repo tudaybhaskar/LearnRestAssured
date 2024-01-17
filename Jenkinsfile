@@ -18,12 +18,15 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    withEnv(['BASE_URI=' + BASE_URI]) {
+                     withEnv(['BASE_URI=' + BASE_URI]) {
                         // Set up Maven
-                        def mvnHome = tool 'Maven_Central'
+                        def mvnHome = tool 'Maven'
                         env.PATH = "${mvnHome}/bin:${env.PATH}"
+
+                        // Build the project
                         sh 'mvn clean install'
-                    }
+
+                     }
                 }
             }
         }
@@ -32,10 +35,11 @@ pipeline {
             steps {
                 script {
                     withEnv(['BASE_URI=' + BASE_URI]) {
-                            echo 'Running  In QA environment'
-                            sh "mvn test -DBASE_URI=${QA_URL}"
-                        }
+                        // Run Selenium tests for QA environment
+                        echo '.......QA Environment.......'
+                        sh "mvn test -DBASE_URI=${QA_URL}"
                     }
+
                 }
             }
         }
@@ -45,7 +49,7 @@ pipeline {
                 script {
                     withEnv(['BASE_URI=' + BASE_URI]) {
                         // Run Selenium tests for UAT environment
-                        echo 'Running  In UAT environment'
+                        echo '.......UAT Environment.......'
                         sh "mvn test -DBASE_URI=${UAT_URL}"
                     }
                 }
@@ -56,10 +60,10 @@ pipeline {
             steps {
                 script {
                     withEnv(['BASE_URI=' + BASE_URI]) {
-                        // Run Selenium tests for Production environment
-                        echo 'Running  In PROD environment'
-                        sh "mvn test -DBASE_URI=${PROD_URL}"
-                        }
+                        // Run Selenium tests for Prod environment
+                        echo '.......PROD Environment.......'
+                            sh "mvn test -DBASE_URI=${PROD_URL}"
+                    }
                 }
             }
         }
@@ -89,4 +93,3 @@ pipeline {
         }
     }
 }
-
