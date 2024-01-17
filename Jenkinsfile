@@ -31,6 +31,7 @@ pipeline {
             steps {
                 script {
                     // Run Selenium tests for QA environment
+                    echo 'Running  In QA environment'
                     sh "mvn test -DBASE_URI=${QA_URL}"
                 }
             }
@@ -40,6 +41,7 @@ pipeline {
             steps {
                 script {
                     // Run Selenium tests for UAT environment
+                    echo 'Running  In UAT environment'
                     sh "mvn test -DDBASE_URI=${UAT_URL}"
                 }
             }
@@ -49,6 +51,7 @@ pipeline {
             steps {
                 script {
                     // Run Selenium tests for Production environment
+                    echo 'Running  In PROD environment'
                     sh "mvn test -DDBASE_URI=${PROD_URL}"
                 }
             }
