@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Set up Maven
-                    def mvnHome = tool 'Maven'
+                    def mvnHome = tool 'Maven_Central'
                     env.PATH = "${mvnHome}/bin:${env.PATH}"
 
                     // Build the project
