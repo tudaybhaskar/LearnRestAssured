@@ -24,6 +24,6 @@ public class DemoTest {
 
         System.out.println("Actual User Id: " + actualUserID);
         assertThat(actualUserID, equalTo(ConfigLoader.getInstance().getUserId()));
-        
+
     }
 }
