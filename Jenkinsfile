@@ -25,7 +25,7 @@ pipeline {
                         env.PATH = "${mvnHome}/bin:${env.PATH}"
 
                         // Build the project
-                        sh 'mvn clean install'
+                        sh "mvn clean install -DBASE_URI=${BASE_URI}"
                     }
                 }
             }
@@ -37,7 +37,7 @@ pipeline {
                     withEnv(['BASE_URI=' + QA_URL]) {
                         // Run Selenium tests for QA environment
                         echo '.......QA Environment.......'
-                        sh "mvn test"
+                        sh "mvn test -DBASE_URI=${QA_URL}"
                     }
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
                     withEnv(['BASE_URI=' + UAT_URL]) {
                         // Run Selenium tests for UAT environment
                         echo '.......UAT Environment.......'
-                        sh "mvn test"
+                        sh "mvn test -DBASE_URI=${UAT_URL}"
                     }
                 }
             }
@@ -61,7 +61,7 @@ pipeline {
                     withEnv(['BASE_URI=' + PROD_URL]) {
                         // Run Selenium tests for Prod environment
                         echo '.......PROD Environment.......'
-                        sh "mvn test"
+                        sh "mvn test -DBASE_URI=${PROD_URL}"
                     }
                 }
             }
