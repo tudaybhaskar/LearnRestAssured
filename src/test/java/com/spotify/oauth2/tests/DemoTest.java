@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class DemoTest {
 
-    private String access_token = "BQBlSq1-nsKQKZbuPJLGyES6pEPXD7iWo22hTsYS6Dq7pe1xyjFiHjPlF3ozDKmvyVIlg3HC2sNomczANaTakMcklqtF-7unk-TzjpdJLTEL1ijn29rFfLMiyubNfXMjOnlbVu74NPBNBje5n80hDg87YbNB4kf926i5Ppnrc5Y1YjzwBJ6rMuYS4xhwZBIRHbou6JtkxW1LA_NbCbb58kDZd1vEXXLRz75GdGybSq5oHQkhwluHBne_ed3Rh2UzVEgXZ7ko3-cR";
+    private String access_token = "BQCti9SbRk6dDw__DGzaacACymK5ji11wVEMSJYESb0m1ebvu5D-VaVjZQl8XRUI5n6Qwvm0AWJtDdverv5olg-Qv1koR2oygYaU7cCDnLS2YdzSMThjsQ0Vakoi6AncgtYnb-hgO1A-arBg_0rZVhXdzl9b1Um3dayqFupomU7xdmiDA5uPD9CFGRi1rJrKd5VmLk1drRyKPrxTy4POsb9RMADy2o2sb_UmSiUFpg2eUj6oF_CzPHs6voEoVeC5NeVW68yswwAj";
 
     @Test
     public void getCurrentUserId(){
