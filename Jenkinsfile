@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        BASE_URI = 'https://api.spotify.com'
         QA_URL = 'https://api.spotify.com'
         UAT_URL = 'https://api.spotify.com'
         PROD_URL = 'https://api.spotify.com'
@@ -17,12 +18,12 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Set up Maven
-                    def mvnHome = tool 'Maven_Central'
-                    env.PATH = "${mvnHome}/bin:${env.PATH}"
-
-                    // Build the project
-                    sh 'mvn clean install'
+                    withEnv(['BASE_URI=' + BASE_URI]) {
+                        // Set up Maven
+                        def mvnHome = tool 'Maven_Central'
+                        env.PATH = "${mvnHome}/bin:${env.PATH}"
+                        sh 'mvn clean install'
+                    }
                 }
             }
         }
@@ -30,9 +31,11 @@ pipeline {
         stage('Run Tests - QA') {
             steps {
                 script {
-                    // Run Selenium tests for QA environment
-                    echo 'Running  In QA environment'
-                    sh "mvn test -DBASE_URI=${QA_URL}"
+                    withEnv(['BASE_URI=' + BASE_URI]) {
+                            echo 'Running  In QA environment'
+                            sh "mvn test -DBASE_URI=${QA_URL}"
+                        }
+                    }
                 }
             }
         }
@@ -40,9 +43,11 @@ pipeline {
         stage('Run Tests - UAT') {
             steps {
                 script {
-                    // Run Selenium tests for UAT environment
-                    echo 'Running  In UAT environment'
-                    sh "mvn test -DDBASE_URI=${UAT_URL}"
+                    withEnv(['BASE_URI=' + BASE_URI]) {
+                        // Run Selenium tests for UAT environment
+                        echo 'Running  In UAT environment'
+                        sh "mvn test -DBASE_URI=${UAT_URL}"
+                    }
                 }
             }
         }
@@ -50,9 +55,11 @@ pipeline {
         stage('Run Tests - Prod') {
             steps {
                 script {
-                    // Run Selenium tests for Production environment
-                    echo 'Running  In PROD environment'
-                    sh "mvn test -DDBASE_URI=${PROD_URL}"
+                    withEnv(['BASE_URI=' + BASE_URI]) {
+                        // Run Selenium tests for Production environment
+                        echo 'Running  In PROD environment'
+                        sh "mvn test -DBASE_URI=${PROD_URL}"
+                        }
                 }
             }
         }
