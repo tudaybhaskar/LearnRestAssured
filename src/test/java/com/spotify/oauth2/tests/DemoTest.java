@@ -8,8 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class DemoTest {
-    private String access_token = "BQB9V1YGDBdBOwAAVJpbAPt1l3y2uFI_1vv9-bABV7AjiFgV2ePCG8zgTftUc-VKriNNLntem" +
-            "DNPYPYf8Ft3IzoKhC4_chqM3m4PAIp-S_mXuaOmr3jMD9bwXdJmgSeeVgVBoOUsntTd4DsOicpWeuC0aUqeX2dnp-_ny4zaI2fefJbkaz5SKdAXXfk_YVdiRCjBCwfMkjGHzRY6ijSvebuss3tn0UJaUCBQngJbNc9pVaWmRQVlhJNC3EEQqvOWO_W5Na8hKa3F";
+    private String access_token = "BQCzHoQEvxQjBJhWbHM1zwOwOD6FAgrJ8id8hMauo57rwgJet6TOXdbRvBCPY8qzTkUaAD50cqQYLZan_hBbdEDK08GOWU3snYG5OgcsPnlAercrfEE0AVW1XES1wvW6Ut8TmjzBC3Q170UCY315cvn5QjEKyQ-QcQo9HJBTHxmCFc2wLGNtqtTl8xBrcm-I9Yufz6kZYK4y12QlLmzrMVrPkncwGQBjmb11rAek8d8VfWO8UBzaHnyKKJceTrHNpcOfuTQaTMVN";
 
     @Test
     public void getCurrentUserProfile(){
