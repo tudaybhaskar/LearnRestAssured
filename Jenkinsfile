@@ -18,6 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                echo "BASE_URI: ${BASE_URI}"
                     withEnv(['BASE_URI=' + BASE_URI]) {
                         // Set up Maven
                         def mvnHome = tool 'Maven_Central'
