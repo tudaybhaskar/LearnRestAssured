@@ -3,7 +3,7 @@ package com.spotify.oauth2.pojo;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import javax.annotation.Generated;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "spotify"
 })
-@Generated("jsonschema2pojo")
 public class ExternalUrls__1 {
 
     @JsonProperty("spotify")

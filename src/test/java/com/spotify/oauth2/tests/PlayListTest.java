@@ -1,6 +1,9 @@
 package com.spotify.oauth2.tests;
 
+import com.spotify.oauth2.api.RestResource;
 import com.spotify.oauth2.api.Routes;
+import com.spotify.oauth2.api.StatusCode;
+import com.spotify.oauth2.api.applicationApi.PlaylistApi;
 import com.spotify.oauth2.pojo.Playlist;
 import com.spotify.oauth2.utils.ConfigLoader;
 import io.qameta.allure.Step;
@@ -16,12 +19,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PlayListTest {
-    private static String access_token = ConfigLoader.getInstance().getAccessToken();//"BQCucUx2ziuNulDqDvUpPQhtosoc-YmGZekxT1rSeIkBRDBxooZIBC1hWktBmkEm67GCzdwZwKKkxTf3m5SzlmJBeTZr_pb5UODx8np05yiM17hThimw8TgDlV-4p8BxUGOceGXBgvDeX7MvWJ2cg0gm4jvNBKeoEP1_NNGuKhKItgS1hPIYmd7SxgrgByxtOCktMPiaSHinhpPWvH4jm1hK_P7ewhjJqNUaVWd5CD9HYZQ5YZGRseIqiX-woVMK9yTlGIW_Vs9t";
+    private final String playlist_description = generateDescription();
+    private final String playlist_name = generateName();
 
-    @Test
+    /*@Test
     public void createPlayList1(){
         //https://api.spotify.com/v1/users/{user_id}/playlists
-        String playlist_description = generateDescription();
 
         Playlist requestPlayList = playlistBuilder(generateName(), playlist_description , false);
 
@@ -41,6 +44,19 @@ public class PlayListTest {
         assertThat(response.jsonPath().getString("description"),equalTo(playlist_description));
     }
 
+     */
+
+    @Test
+    public void verifyCreation_Of_Playlist(){
+        Playlist requestPlaylist = playlistBuilder( playlist_name, playlist_description, false );
+
+        Response response = PlaylistApi.post( requestPlaylist );
+        assertStatusCode( response.statusCode(), StatusCode.CODE_201);
+        assertPlaylistName( response.jsonPath().getString("name"), playlist_name);
+        assertPlaylistDescription( response.jsonPath().getString("description"), playlist_description);
+    }
+
+
     @Step
     public Playlist playlistBuilder(String name, String description, boolean _public ){
         return Playlist.builder()
@@ -48,5 +64,20 @@ public class PlayListTest {
                 .description(description)
                 ._public(_public)
                 .build();
+    }
+
+    @Step
+    public void assertStatusCode( int actualStatusCode, StatusCode statusCode){
+        assertThat( actualStatusCode, equalTo(statusCode.code));
+    }
+
+    @Step
+    public void assertPlaylistName( String actualPlaylistName, String expectedPlayListName ){
+        assertThat( actualPlaylistName, equalTo( playlist_name));
+    }
+
+    @Step
+    public void assertPlaylistDescription( String actualPlaylistDescription, String expectedPlaylistDescription ){
+        assertThat( actualPlaylistDescription, equalTo(expectedPlaylistDescription));
     }
 }

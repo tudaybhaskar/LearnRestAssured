@@ -4,7 +4,7 @@ package com.spotify.oauth2.pojo;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Generated;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "previous",
     "total"
 })
-@Generated("jsonschema2pojo")
+
 public class Tracks {
 
     @JsonProperty("href")

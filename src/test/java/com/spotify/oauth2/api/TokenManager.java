@@ -10,8 +10,9 @@ import static io.restassured.RestAssured.given;
 
 public class TokenManager {
 
-    private static String access_token;
-    private static Instant expiry_time;
+    private static String access_token ; //ConfigLoader.getInstance().getAccessToken();
+    private static Instant expiry_time ;
+    //We can use the same refresh token for generating the access_token many no of times
 
     public synchronized static String getToken(){
         try{
